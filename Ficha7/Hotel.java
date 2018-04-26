@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Hotel here.
+ * Base Class for all the Hotel types
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Luís Alves
+ * @version 1.1
  */
 
 import java.lang.StringBuffer;

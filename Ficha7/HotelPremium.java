@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class HotelStandard here.
+ * Class that represents a Hotel whose price is increased by a luxury tax
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Luís Alves
+ * @version 1.1
  */
 public class HotelPremium extends Hotel{
     public double taxaDeLuxo;

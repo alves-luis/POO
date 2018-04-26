@@ -1,9 +1,10 @@
 
 /**
- * Write a description of class HotelDiscount here.
+ * Class that represents a Hotel, whose price is linearly related to its
+ * occupation rate
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Luís Alves
+ * @version 1.1
  */
 public class HotelDiscount extends HotelStandard{
 

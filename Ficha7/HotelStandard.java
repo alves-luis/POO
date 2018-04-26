@@ -1,9 +1,10 @@
 
 /**
- * Write a description of class HotelStandard here.
+ * Class that represents a hotel whose price changes by +20 given a season
+ * (high or low)
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Luís Alves
+ * @version 1.1
  */
 public class HotelStandard extends Hotel{
     public static final boolean ALTA = true;

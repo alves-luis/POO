@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class HotelMain here.
+ * Class to teste all the Hotel Classes
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Luís Alves
+ * @version 1.1
  */
 
 import java.util.HashSet;
