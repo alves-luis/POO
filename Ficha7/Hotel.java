@@ -125,7 +125,7 @@ public class Hotel {
     }
 
     public String toString() {
-      StringBuffer buf = new StringBuffer();
+      StringBuilder buf = new StringBuilder();
       buf.append("Código: ");buf.append(this.getCod());buf.append("\n");
       buf.append("Nome: ");buf.append(this.getNome());buf.append("\n");
       buf.append("Local: ");buf.append(this.getLocal());buf.append("\n");
