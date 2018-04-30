@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HotelMain{
-  public static final boolean ALTA = true;
-  public static final boolean BAIXA = false;
     public static void main(String[] args) {
 
       Hotel h1 = new Hotel("AAA","Hotel AAA","Amarante",3,100,20);
@@ -25,9 +23,9 @@ public class HotelMain{
       System.out.println(h4.toString());
       System.out.println(h5.toString());
 
-      HotelStandard s1 = new HotelStandard(ALTA,"SAA","Hotel SAA","Bragança",3,10,30);
-      HotelStandard s2 = new HotelStandard(BAIXA,"SAB","Hotel SAB","Chaves",4,20,40);
-      HotelStandard s3 = new HotelStandard(BAIXA,"SAC","Hotel SAC","Braga",4,50,50);
+      HotelStandard s1 = new HotelStandard(HotelStandard.ALTA,"SAA","Hotel SAA","Bragança",3,10,30);
+      HotelStandard s2 = new HotelStandard(HotelStandard.BAIXA,"SAB","Hotel SAB","Chaves",4,20,40);
+      HotelStandard s3 = new HotelStandard(HotelStandard.BAIXA,"SAC","Hotel SAC","Braga",4,50,50);
       System.out.println(s1.toString());
       System.out.println(s2.toString());
       System.out.println(s3.toString());
@@ -81,7 +79,7 @@ public class HotelMain{
       inc.adiciona(tmp);
       System.out.println("Há " + inc.quantos() + " hoteis");
 
-      inc.mudaPara(BAIXA);
+      inc.mudaPara(HotelStandard.BAIXA);
       System.out.println(inc.getHotel("SAA").toString());
       System.out.println(inc.getHotel("SAB").toString());
       System.out.println(inc.getHotel("SAC").toString());
