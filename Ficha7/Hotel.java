@@ -15,7 +15,6 @@ public class Hotel {
     private String local;
     private int categoria;
     private int quartosDisp;
-    private int quartosTotal;
     private double preco;
 
 
@@ -29,17 +28,15 @@ public class Hotel {
         this.local = "";
         this.categoria = 0;
         this.quartosDisp = 0;
-        this.quartosTotal = 0;
         this.preco = 0;
     }
 
-    public Hotel(String cod, String nome, String local, int cat, int quartos, int total, double preco) {
+    public Hotel(String cod, String nome, String local, int cat, int quartos, double preco) {
         this.cod = cod;
         this.nome = nome;
         this.local = local;
         this.categoria = cat;
         this.quartosDisp = quartos;
-        this.quartosTotal = total;
         this.preco = preco;
     }
 
@@ -49,7 +46,6 @@ public class Hotel {
         this.local = h.getLocal();
         this.categoria = h.getCategoria();
         this.quartosDisp = h.getDisponiveis();
-        this.quartosTotal = h.getCapacidade();
         this.preco = h.getPreco();
     }
 
@@ -59,7 +55,6 @@ public class Hotel {
         this.local = "";
         this.categoria = 0;
         this.quartosDisp = 0;
-        this.quartosTotal = 0;
         this.preco = preco;
     }
 
@@ -83,17 +78,11 @@ public class Hotel {
         return this.quartosDisp;
     }
 
-    public int getCapacidade() {
-      return this.quartosTotal;
-    }
 
     public double getPreco() {
         return this.preco;
     }
 
-    public void setCapacidade(int cap) {
-      this.quartosTotal = cap;
-    }
 
     public void setCod(String c) {
         this.cod = c;
@@ -115,9 +104,6 @@ public class Hotel {
         this.preco = p;
     }
 
-    public double getOcupacao() {
-      return (1 - ((double) this.quartosDisp / (double) this.quartosTotal));
-    }
 
     public boolean equals(Object o) {
     if (this == o)
@@ -145,9 +131,7 @@ public class Hotel {
       buf.append("Local: ");buf.append(this.getLocal());buf.append("\n");
       buf.append("Categoria: ");buf.append(this.getCategoria());buf.append("\n");
       buf.append("Quartos disp: ");buf.append(this.getDisponiveis());buf.append("\n");
-      buf.append("Quartos total: ");buf.append(this.getCapacidade());buf.append("\n");
       buf.append("Preço: ");buf.append(this.getPreco());buf.append("\n");
-      buf.append("Ocupação: ");buf.append(this.getOcupacao());buf.append("\n");
       return buf.toString();
     }
 
