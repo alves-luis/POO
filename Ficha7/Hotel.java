@@ -3,7 +3,7 @@
  * Base Class for all the Hotel types
  *
  * @author Luís Alves
- * @version 1.1
+ * @version 1.2
  */
 
 import java.lang.StringBuffer;

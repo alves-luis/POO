@@ -4,7 +4,7 @@
  * occupation rate
  *
  * @author Luís Alves
- * @version 1.1
+ * @version 1.2
  */
 public class HotelDiscount extends HotelStandard{
 

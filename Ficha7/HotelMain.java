@@ -3,7 +3,7 @@
  * Class to teste all the Hotel Classes
  *
  * @author Luís Alves
- * @version 1.1
+ * @version 1.2
  */
 
 import java.util.HashSet;
