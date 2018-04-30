@@ -78,7 +78,7 @@ public class HotelMain{
       HashSet<Hotel> tmp = new HashSet<>();
       tmp.add(h4);
       tmp.add(h5);
-      inc.adiciona((Set<Hotel>)tmp);
+      inc.adiciona(tmp);
       System.out.println("Há " + inc.quantos() + " hoteis");
 
       inc.mudaPara(BAIXA);
