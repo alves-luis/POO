@@ -13,7 +13,7 @@ import java.util.Iterator;
  * Class that implements a grouping of Hotels of different types
  *
  * @author Luís Alves
- * @version 1.2
+ * @version 1.3
  */
 public class HotelInc {
     private static Map<String,Comparator<Hotel>> comparadores = new HashMap<>();
@@ -33,6 +33,11 @@ public class HotelInc {
      */
     public HotelInc() {
         this.hoteis = new HashMap<>();
+    }
+
+    public HotelInc(HotelInc h) {
+      this.hoteis = new HashMap<>();
+      h.getHoteis().stream().forEach(t -> this.hoteis.put(t.getNome(),t.clone()));
     }
 
     public boolean existeHotel(String cod) {
@@ -96,5 +101,24 @@ public class HotelInc {
 
     public Iterator<Hotel> ordenarHoteis(String criterio) {
         return ordenarHoteis(getComparador(criterio)).iterator();
+    }
+
+    public boolean equals(Object o) {
+      if (o == this)
+        return true;
+
+      if (o == null || o.getClass() != this.getClass())
+        return false;
+
+      HotelInc i = (HotelInc) o;
+      return this.hoteis.equals(i.getHoteis());
+    }
+
+    public String toString() {
+      return this.hoteis.toString();
+    }
+
+    public HotelInc clone() {
+      return new HotelInc(this);
     }
 }
