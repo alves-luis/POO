@@ -3,10 +3,11 @@
  * Class that represents a Hotel whose price is increased by a luxury tax
  *
  * @author Luís Alves
- * @version 1.1
+ * @version 1.2
  */
-public class HotelPremium extends Hotel{
-    public double taxaDeLuxo;
+public class HotelPremium extends Hotel implements CartaoHoteis{
+    private double taxaDeLuxo;
+    private int pontosPorEuro;
 
     /**
      * Constructor for objects of class HotelStandard
@@ -14,21 +15,25 @@ public class HotelPremium extends Hotel{
     public HotelPremium() {
         super();
         this.taxaDeLuxo = 0;
+        this.pontosPorEuro = 0;
     }
 
     public HotelPremium(double taxa) {
         super();
         this.taxaDeLuxo = taxa;
+        this.pontosPorEuro = 0;
     }
 
-    public HotelPremium(double taxa, String cod, String nome, String local, int cat, int quartos, int total, double preco) {
-      super(cod,nome,local,cat,quartos,total,preco);
+    public HotelPremium(double taxa, String cod, String nome, String local, int cat, int quartos, double preco) {
+      super(cod,nome,local,cat,quartos,preco);
       this.taxaDeLuxo = taxa;
+      this.pontosPorEuro = 0;
     }
 
     public HotelPremium(HotelPremium h) {
         super(h);
         this.taxaDeLuxo = h.getTaxaDeLuxo();
+        this.pontosPorEuro = h.getPontosPorEuro();
     }
 
     public double getTaxaDeLuxo() {
@@ -42,7 +47,15 @@ public class HotelPremium extends Hotel{
     public double getPreco() {
         return super.getPreco()*(1+this.taxaDeLuxo);
     }
-
+    
+    public int getPontosPorEuro() {
+        return this.pontosPorEuro;
+    }
+    
+    public void setPontosPorEuro(int ppe) {
+        this.pontosPorEuro = ppe;
+    }
+    
     public HotelPremium clone() {
       return new HotelPremium(this);
     }

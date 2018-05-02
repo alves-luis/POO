@@ -3,14 +3,29 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.TreeSet;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Iterator;
 
 /**
  * Class that implements a grouping of Hotels of different types
  *
  * @author Luís Alves
- * @version 1.1
+ * @version 1.3
  */
 public class HotelInc {
+    private static Map<String,Comparator<Hotel>> comparadores = new HashMap<>();
+
+    public static void addComparador(Comparator<Hotel> c, String nome) {
+        comparadores.put(nome,c);
+    }
+
+    public static Comparator<Hotel> getComparador(String nome) {
+        return comparadores.get(nome);
+    }
+
     private HashMap<String,Hotel> hoteis;
 
     /**
@@ -18,6 +33,11 @@ public class HotelInc {
      */
     public HotelInc() {
         this.hoteis = new HashMap<>();
+    }
+
+    public HotelInc(HotelInc h) {
+      this.hoteis = new HashMap<>();
+      h.getHoteis().stream().forEach(t -> this.hoteis.put(t.getNome(),t.clone()));
     }
 
     public boolean existeHotel(String cod) {
@@ -33,15 +53,7 @@ public class HotelInc {
     }
 
     public int quantosT(String tipo) {
-      if (tipo == "Standard")
-        return (int)this.hoteis.values().stream().filter(h -> h.getClass().equals(HotelStandard.class)).count();
-      if (tipo == "Premium")
-        return (int)this.hoteis.values().stream().filter(h -> h.getClass().equals(HotelPremium.class)).count();
-      if (tipo == "Discount")
-        return (int)this.hoteis.values().stream().filter(h -> h.getClass().equals(HotelDiscount.class)).count();
-      if (tipo == "Hotel")
-        return (int)this.hoteis.values().stream().filter(h -> h.getClass().equals(Hotel.class)).count();
-      else return 0;
+      return (int) this.hoteis.values().stream().filter(h -> h.getClass().getSimpleName().equals(tipo)).count();
     }
 
     public Hotel getHotel(String cod) {
@@ -68,7 +80,45 @@ public class HotelInc {
     }
 
     public double getMaxReceitaDiaria() {
-      return this.hoteis.values().stream().mapToDouble(h -> h.getPreco()*h.getCapacidade()).sum();
+      return this.hoteis.values().stream().mapToDouble(h -> h.getPreco()*h.getDisponiveis()).sum();
     }
 
+    public List<CartaoHoteis> daoPontos() {
+        return this.hoteis.values().stream()
+        .filter(h -> h instanceof CartaoHoteis)
+        .map(Hotel :: clone)
+        .map(h -> (CartaoHoteis) h)
+        .collect(Collectors.toList());
+    }
+
+    public TreeSet<Hotel> ordenarHoteis() {
+      return this.hoteis.values().stream().map(Hotel :: clone).collect(Collectors.toCollection(TreeSet :: new));
+    }
+
+    public TreeSet<Hotel> ordenarHoteis(Comparator<Hotel> c) {
+      return this.hoteis.values().stream().map(Hotel :: clone).collect(Collectors.toCollection(() -> new TreeSet(c)));
+    }
+
+    public Iterator<Hotel> ordenarHoteis(String criterio) {
+        return ordenarHoteis(getComparador(criterio)).iterator();
+    }
+
+    public boolean equals(Object o) {
+      if (o == this)
+        return true;
+
+      if (o == null || o.getClass() != this.getClass())
+        return false;
+
+      HotelInc i = (HotelInc) o;
+      return this.hoteis.equals(i.getHoteis());
+    }
+
+    public String toString() {
+      return this.hoteis.toString();
+    }
+
+    public HotelInc clone() {
+      return new HotelInc(this);
+    }
 }
