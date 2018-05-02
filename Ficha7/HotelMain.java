@@ -3,13 +3,14 @@
  * Class to teste all the Hotel Classes
  *
  * @author Luís Alves
- * @version 1.2
+ * @version 1.3
  */
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class HotelMain{
     public static void main(String[] args) {
@@ -90,10 +91,19 @@ public class HotelMain{
 
       // Fase 2;
       System.out.println("Fase 2");
+      HotelInc.addComparador(new ComparadorPorCategoria(),"Categoria");
+      HotelInc.addComparador(new ComparadorPorNumeroQuartos(),"Quartos");
       TreeSet<Hotel> ordNat = inc.ordenarHoteis();
       System.out.println(ordNat.toString());
       TreeSet<Hotel> ordQuero = inc.ordenarHoteis(new ComparadorPorNumeroQuartos());
       System.out.println(ordQuero.toString());
       System.out.println(ordNat.size() + " - " + ordQuero.size());
+      Iterator<Hotel> it = inc.ordenarHoteis("Categoria");
+      int r = 0;
+      while (it.hasNext()) {
+        r++;
+        it.next();
+      }
+      System.out.println("Há:" + r);
     }
 }

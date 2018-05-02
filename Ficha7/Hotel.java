@@ -3,7 +3,7 @@
  * Base Class for all the Hotel types
  *
  * @author Luís Alves
- * @version 1.2
+ * @version 1.3
  */
 
 
@@ -122,7 +122,8 @@ public class Hotel implements Comparable {
 
     public int compareTo(Object o) {
       Hotel h = (Hotel) o;
-      return this.categoria - h.getCategoria();
+      int res = this.getCategoria() - h.getCategoria();
+      return (res) == 0 ? 1 : res;
     }
 
     public String toString() {
