@@ -8,6 +8,8 @@
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 public class HotelMain{
     public static void main(String[] args) {
@@ -85,5 +87,13 @@ public class HotelMain{
       System.out.println(inc.getHotel("SAC").toString());
 
       System.out.println("Máxima receita total: " + inc.getMaxReceitaDiaria());
+
+      // Fase 2;
+      System.out.println("Fase 2");
+      TreeSet<Hotel> ordNat = inc.ordenarHoteis();
+      System.out.println(ordNat.toString());
+      TreeSet<Hotel> ordQuero = inc.ordenarHoteis(new ComparadorPorNumeroQuartos());
+      System.out.println(ordQuero.toString());
+      System.out.println(ordNat.size() + " - " + ordQuero.size());
     }
 }

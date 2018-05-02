@@ -6,9 +6,9 @@
  * @version 1.2
  */
 
-import java.lang.StringBuffer;
 
-public class Hotel {
+
+public class Hotel implements Comparable {
     // instance variables - replace the example below with your own
     private String cod;
     private String nome;
@@ -113,14 +113,15 @@ public class Hotel {
         return false;
 
     Hotel h = (Hotel) o;
-    return (this.getCod() == h.getCod());
+    return (this.getCod().equals(h.getCod()));
     }
 
     public Hotel clone() {
         return new Hotel(this);
     }
 
-    public int compareTo(Hotel h) {
+    public int compareTo(Object o) {
+      Hotel h = (Hotel) o;
       return this.categoria - h.getCategoria();
     }
 
