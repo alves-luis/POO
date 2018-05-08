@@ -68,10 +68,10 @@ public class HotelMain{
 
       System.out.println("Há " + inc.quantos("Braga") + " hoteis em Braga");
       System.out.println("Há " + inc.quantos("Chaves") + " hoteis em Chaves");
-      System.out.println("Há " + inc.quantosT("Standard") + " hoteis Standard");
-      System.out.println("Há " + inc.quantosT("Discount") + " hoteis Discount");
+      System.out.println("Há " + inc.quantosT("HotelStandard") + " hoteis Standard");
+      System.out.println("Há " + inc.quantosT("HotelDiscount") + " hoteis Discount");
       System.out.println("Há " + inc.quantosT("Hotel") + " hoteis Hotel");
-      System.out.println("Há " + inc.quantosT("Premium") + " hoteis Premium");
+      System.out.println("Há " + inc.quantosT("HotelPremium") + " hoteis Premium");
 
       System.out.println(inc.getHotel("AAA").toString());
       System.out.println(inc.getHoteis().toString());

@@ -7,7 +7,7 @@
  */
 public interface CartaoHoteis {
 
-  void setPontosPorEuro(int pontos);
-  int getPontosPorEuro();
+  public void setPontosPorEuro(int pontos);
+  public int getPontosPorEuro();
 
 }
