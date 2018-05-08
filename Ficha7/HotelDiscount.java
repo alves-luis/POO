@@ -22,7 +22,12 @@ public class HotelDiscount extends HotelStandard{
         this.ocupacao = h.getOcupacao();
     }
 
-    public HotelDiscount(String cod, String nome, String local, int cat, int quartos, double ocup, double preco) {
+    public HotelDiscount(Hotel h) {
+      super(h);
+      this.ocupacao = 0;
+    }
+
+    public HotelDiscount(String cod, String nome, String local, int cat, int quartos, double ocup, double preco) throws HotelParametersException {
       super(cod,nome,local,cat,quartos,preco);
       this.ocupacao = ocup;
     }
@@ -31,8 +36,9 @@ public class HotelDiscount extends HotelStandard{
       return this.ocupacao;
     }
 
-    public void setOcupacao(double oc) {
-      this.ocupacao = oc;
+    public void setOcupacao(double oc) throws HotelParametersException{
+      if (oc < 0) throw new HotelParametersException("ocupação");
+      else this.ocupacao = oc;
     }
 
     public double getPreco() {

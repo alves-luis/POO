@@ -8,14 +8,22 @@ import java.util.TreeSet;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Iterator;
+import java.io.Serializable;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 /**
  * Class that implements a grouping of Hotels of different types
  *
  * @author Luís Alves
- * @version 1.3
+ * @version 1.5
  */
-public class HotelInc {
+public class HotelInc implements Serializable {
     private static Map<String,Comparator<Hotel>> comparadores = new HashMap<>();
 
     public static void addComparador(Comparator<Hotel> c, String nome) {
@@ -56,12 +64,20 @@ public class HotelInc {
       return (int) this.hoteis.values().stream().filter(h -> h.getClass().getSimpleName().equals(tipo)).count();
     }
 
-    public Hotel getHotel(String cod) {
-        return this.hoteis.get(cod).clone();
+    public Hotel getHotel(String cod) throws HotelException {
+        if (this.existeHotel(cod))
+          return this.hoteis.get(cod).clone();
+        else
+          throw new HotelException("Não existe Hotel com esse código!");
     }
 
-    public void adiciona(Hotel h) {
+    public void adiciona(Hotel h) throws HotelException {
+      if (h == null)
+        throw new HotelException("Hotel inválido!");
+      if (!this.existeHotel(h.getCod()))
         this.hoteis.put(h.getCod(),h.clone());
+      else
+        throw new HotelException("Não é possível adicionar hoteis repetidos!");
     }
 
     public List<Hotel> getHoteis() {
@@ -101,6 +117,39 @@ public class HotelInc {
 
     public Iterator<Hotel> ordenarHoteis(String criterio) {
         return ordenarHoteis(getComparador(criterio)).iterator();
+    }
+
+    public void escreveEmFicheiroCSV(String ficheiro) throws IOException {
+      PrintWriter fich = new PrintWriter(ficheiro);
+      StringBuilder sb = new StringBuilder();
+      sb.append("codigo"); sb.append(',');
+      sb.append("nome"); sb.append(',');
+      sb.append("local"); sb.append(',');
+      sb.append("categoria"); sb.append(',');
+      sb.append("quartos"); sb.append(',');
+      sb.append("preço"); sb.append(',');
+      sb.append("epoca"); sb.append(',');
+
+      fich.println(sb.toString());
+      this.hoteis.values().stream().forEach(h -> fich.println(h.toString()));
+      fich.flush();
+      fich.close();
+    }
+
+    public void guardaEstadoObject(String ficheiro) throws FileNotFoundException, IOException {
+      FileOutputStream fos = new FileOutputStream(ficheiro);
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(this);
+      oos.flush();
+      oos.close();
+    }
+
+    public static HotelInc carregaEstadoObject(String ficheiro) throws FileNotFoundException, IOException, ClassNotFoundException {
+      FileInputStream fich = new FileInputStream(ficheiro);
+      ObjectInputStream ois = new ObjectInputStream(fich);
+      HotelInc h = (HotelInc) ois.readObject();
+      ois.close();
+      return h;
     }
 
     public boolean equals(Object o) {

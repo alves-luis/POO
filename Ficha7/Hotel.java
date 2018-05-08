@@ -3,13 +3,13 @@
  * Base Class for all the Hotel types
  *
  * @author Luís Alves
- * @version 1.3
+ * @version 1.5
  */
 
+import java.io.Serializable;
 
-
-public class Hotel implements Comparable {
-    // instance variables - replace the example below with your own
+public class Hotel implements Comparable, Serializable {
+    // instance variables
     private String cod;
     private String nome;
     private String local;
@@ -31,13 +31,21 @@ public class Hotel implements Comparable {
         this.preco = 0;
     }
 
-    public Hotel(String cod, String nome, String local, int cat, int quartos, double preco) {
+    public Hotel(String cod, String nome, String local, int cat, int quartos, double preco) throws HotelParametersException {
+      if (quartos < 1)
+        throw new HotelParametersException("quartos");
+      if (preco <= 0)
+        throw new HotelParametersException("preco");
+      if (cat > 5 || cat < 1)
+        throw new HotelParametersException("categoria");
+      else {
         this.cod = cod;
         this.nome = nome;
         this.local = local;
         this.categoria = cat;
         this.quartosDisp = quartos;
         this.preco = preco;
+      }
     }
 
     public Hotel(Hotel h) {
@@ -49,13 +57,17 @@ public class Hotel implements Comparable {
         this.preco = h.getPreco();
     }
 
-    public Hotel(double preco) {
+    public Hotel(double preco) throws HotelParametersException {
+      if (preco <= 0)
+        throw new HotelParametersException("preço");
+      else {
         this.cod = "";
         this.nome = "";
         this.local = "";
         this.categoria = 0;
         this.quartosDisp = 0;
         this.preco = preco;
+      }
     }
 
     public String getCod() {
@@ -92,16 +104,29 @@ public class Hotel implements Comparable {
         this.nome = n;
     }
 
-    public void setCategoria(int c) {
-        this.categoria = c;
+    public void setCategoria(int c) throws HotelParametersException {
+        if (c > 5 || c < 1)
+            throw new HotelParametersException("preco");
+        else
+            this.categoria = c;
     }
 
-    public void setDisponiveis(int d) {
-        this.quartosDisp = d;
+    public void setDisponiveis(int d) throws HotelParametersException {
+        if (d < 0)
+            throw new HotelParametersException("quartos");
+        else
+            this.quartosDisp = d;
     }
 
-    public void setPreco(double p) {
-        this.preco = p;
+    public void setPreco(double p) throws HotelParametersException {
+        if (p < 0)
+            throw new HotelParametersException("preco");
+        else
+            this.preco = p;
+    }
+
+    public void setLocal(String s) {
+      this.local = s;
     }
 
 
@@ -128,12 +153,12 @@ public class Hotel implements Comparable {
 
     public String toString() {
       StringBuilder buf = new StringBuilder();
-      buf.append("Código: ");buf.append(this.getCod());buf.append("\n");
-      buf.append("Nome: ");buf.append(this.getNome());buf.append("\n");
-      buf.append("Local: ");buf.append(this.getLocal());buf.append("\n");
-      buf.append("Categoria: ");buf.append(this.getCategoria());buf.append("\n");
-      buf.append("Quartos disp: ");buf.append(this.getDisponiveis());buf.append("\n");
-      buf.append("Preço: ");buf.append(this.getPreco());buf.append("\n");
+      buf.append(this.getCod());buf.append(',');
+      buf.append(this.getNome());buf.append(',');
+      buf.append(this.getLocal());buf.append(',');
+      buf.append(this.getCategoria());buf.append(',');
+      buf.append(this.getDisponiveis());buf.append(',');
+      buf.append(this.getPreco());buf.append(',');
       return buf.toString();
     }
 

@@ -4,7 +4,7 @@
  * (high or low)
  *
  * @author Luís Alves
- * @version 1.2
+ * @version 1.4
  */
 public class HotelStandard extends Hotel implements CartaoHoteis{
     public static final boolean ALTA = true;
@@ -21,13 +21,13 @@ public class HotelStandard extends Hotel implements CartaoHoteis{
         this.pontosPorEuro = 0;
     }
 
-    public HotelStandard(String cod, String nome, String local, int cat, int quartos, double preco) {
+    public HotelStandard(String cod, String nome, String local, int cat, int quartos, double preco) throws HotelParametersException {
       super(cod,nome,local,cat,quartos,preco);
       this.epoca = BAIXA;
       this.pontosPorEuro = 0;
     }
 
-    public HotelStandard(boolean epoca, String cod, String nome, String local, int cat, int quartos, double preco) {
+    public HotelStandard(boolean epoca, String cod, String nome, String local, int cat, int quartos, double preco) throws HotelParametersException {
       super(cod,nome,local,cat,quartos,preco);
       this.epoca = epoca;
       this.pontosPorEuro = 0;
@@ -36,6 +36,12 @@ public class HotelStandard extends Hotel implements CartaoHoteis{
     public HotelStandard(boolean epocaAlta) {
         super();
         this.epoca = epocaAlta;
+        this.pontosPorEuro = 0;
+    }
+    
+    public HotelStandard(Hotel h) {
+        super(h);
+        this.epoca = BAIXA;
         this.pontosPorEuro = 0;
     }
 
@@ -56,11 +62,11 @@ public class HotelStandard extends Hotel implements CartaoHoteis{
     public double getPreco() {
         return this.epoca == ALTA ? super.getPreco()+20 : super.getPreco();
     }
-    
+
     public void setPontosPorEuro(int ppe) {
         this.pontosPorEuro = ppe;
     }
-    
+
     public int getPontosPorEuro() {
         return this.pontosPorEuro;
     }
@@ -70,9 +76,11 @@ public class HotelStandard extends Hotel implements CartaoHoteis{
     }
 
     public String toString() {
-      String epoca = this.getEpoca() == ALTA ? "Alta" : "Baixa";
-      String result = "Epoca: " + epoca + "\n";
-      return super.toString() + result;
+      String epoca = this.getEpoca() == ALTA ? "alta" : "baixa";
+      StringBuilder sb = new StringBuilder();
+      sb.append(super.toString());
+      sb.append(epoca);sb.append(',');
+      return sb.toString();
 
     }
 }
