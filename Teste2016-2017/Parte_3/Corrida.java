@@ -20,7 +20,7 @@ public class Corrida {
        // Começa o TempoTotal de acordo com a primeira volta
        for(Map.Entry<String,Tempo> en : temposPorVolta.get(0).entrySet())
            tempoTotal.put(en.getKey(),en.getValue());
-
+       if(volta < 0) throw new VoltaInvalidaException();
        for(int n = 1; n < volta; n++) {
            TreeMap<String,Tempo> resultadoDaVolta = temposPorVolta.get(volta);
            if (resultadoDaVolta == null) throw new VoltaInvalidaException();
