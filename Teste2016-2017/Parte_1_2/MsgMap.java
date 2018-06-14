@@ -42,7 +42,8 @@ public class MsgMap {
         .mapToInt(a -> (int)a.stream()
             .map(msg -> msg.getRemetente())
             .filter(rem -> rem.equals(remetente))
-            .count()).sum();
+            .count())
+        .sum();
     }
     
     public void antiSpam(String palavra) {

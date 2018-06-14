@@ -20,6 +20,12 @@ public class HotelDiscount extends HotelStandard{
     public HotelDiscount(HotelDiscount h) {
         super(h);
         this.ocupacao = h.getOcupacao();
+        try {
+            this.setPreco(h.getPreco()/(0.4*this.ocupacao+0.5));
+        }
+        catch (HotelParametersException e) {
+            this.ocupacao = 0;
+        }
     }
 
     public HotelDiscount(Hotel h) {

@@ -40,6 +40,12 @@ public class HotelPremium extends Hotel implements CartaoHoteis{
         super(h);
         this.taxaDeLuxo = h.getTaxaDeLuxo();
         this.pontosPorEuro = h.getPontosPorEuro();
+        try {
+            this.setPreco(h.getPreco()/(1+this.taxaDeLuxo));
+        }
+        catch (HotelParametersException e) {
+            this.taxaDeLuxo = 0;
+        }
     }
 
     public double getTaxaDeLuxo() {
@@ -66,6 +72,6 @@ public class HotelPremium extends Hotel implements CartaoHoteis{
     public HotelPremium clone() {
       return new HotelPremium(this);
     }
-    
+
 
 }
