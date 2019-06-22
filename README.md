@@ -1,5 +1,6 @@
-# POO
-This repo contains code made for the classes of Object Oriented Programming
-from University of Minho.
+# OOP - Practise Exercises
+This repo contains code made for the classes of Object Oriented Programming Course from University of Minho.
 
-Use it with care, and *responsibility*!
+It's a Hotel Management System and some exam exercises that I tried to solve.
+
+
